@@ -17,6 +17,13 @@ void PlayerAudio::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
 void PlayerAudio::getNextAudioBlock(const juce::AudioSourceChannelInfo& bufferToFill)
 {
     transportSource.getNextAudioBlock(bufferToFill);
+       if (Repeat){
+        if ((transportSource.getLengthInSeconds() - transportSource.getCurrentPosition()) < 0.05)
+        {
+            transportSource.setPosition(0.0);
+            transportSource.start();
+        }
+    } 
 }
 
 void PlayerAudio::releaseResources()
@@ -65,4 +72,7 @@ double PlayerAudio::getPosition() {
 }
 double PlayerAudio::getLength() {
     return transportSource.getLengthInSeconds();
+}
+void PlayerAudio::setRepeat(bool shouldRepeat) {
+	Repeat = shouldRepeat;
 }

@@ -1,7 +1,7 @@
 #include "PlayerGUI.h"
 PlayerGUI::PlayerGUI()
 {
-    for (auto* btn : { &loadButton, &restartButton , &stopButton})
+    for (auto* btn : { &loadButton, &restartButton , &stopButton , &repeatButton})
     {
         btn->addListener(this);
         addAndMakeVisible(btn);
@@ -71,6 +71,12 @@ void PlayerGUI::buttonClicked(juce::Button* button)
         playerAudio.stop();
         playerAudio.setPosition(0.0);
     }
+    	if (button == &repeatButton)
+	{
+		static bool isRepeating = false;
+		isRepeating = !isRepeating;
+		playerAudio.setRepeat(isRepeating);
+	}
 }
 void PlayerGUI::paint(juce::Graphics& g)
 {

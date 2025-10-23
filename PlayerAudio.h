@@ -15,7 +15,9 @@ public:
     void setPosition(float pos);
     double getPosition();
     double getLength();
+	void setRepeat(bool shouldRepeat);
 private:
+    bool Repeat = false;
     juce::AudioFormatManager formatManager;
     std::unique_ptr<juce::AudioFormatReaderSource> readerSource;
     juce::AudioTransportSource transportSource;
